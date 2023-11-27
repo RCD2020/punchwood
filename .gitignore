@@ -1,0 +1,9 @@
+# python stuff
+
+
+# Apple stuff
+.DS_Store
+
+# testing stuff
+test.*
+/test*
