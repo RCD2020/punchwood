@@ -7,16 +7,26 @@ November 27, 2023
 '''
 import os
 import json
+from punchwood.datapacks.filter import Filter
 
 
 class Datapack:
+    '''
+    Used for generating the datapack
+
+    2023.11.27
+    '''
+
+
     def __init__(
             self,
             name: str = 'test',
-            description: str = 'test datapack'
-        ):
+            description: str = 'test datapack',
+            filter: Filter = None
+        ) -> None:
         self.name = name
         self.desc = description
+        self.filter = filter
 
     
     def generate(self):
@@ -49,7 +59,8 @@ class Datapack:
             }
         }
 
-        # TODO: implement filters
+        if self.filter != None:
+            mcmeta['filter'] = self.filter.get_filter()
 
         with open(f'{folder}/pack.mcmeta', 'w') as file:
             file.write(json.dumps(mcmeta, indent=4))
