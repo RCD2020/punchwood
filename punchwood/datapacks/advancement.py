@@ -25,25 +25,6 @@ class Frame(Enum):
     CHALLENGE = 'challenge'
 
 
-class Criterion:
-    '''
-    Used for handling criteria.
-
-    name : str -- Unique Name of Criterion
-
-    2023.11.29
-    '''
-
-    def __init__(
-            self,
-            name: str,
-            trigger
-        ) -> None:
-
-        self.name = name
-        self.trigger = trigger
-
-
 class Advancement:
     '''
     Used for generating advancements.
