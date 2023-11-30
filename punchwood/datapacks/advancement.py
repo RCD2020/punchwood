@@ -49,6 +49,9 @@ class Advancement:
     Used for generating advancements.
 
     DISPLAY ATTRIBUTES:
+    display : bool -- if False, advancement will be permanently hidden \
+    from players, this is useful for unlocking recipes and other \
+    reward systems (default: True)
     title : bool | float | str | dict | list -- name of advancement, \
     JSON text component supported (default: 'test advancement')
     icon : str -- item id to represent advancement (default: \
@@ -77,6 +80,7 @@ class Advancement:
             self,
 
             # display
+            display: bool = True,
             title: Union[
                 bool, float, str, dict, list
             ] = 'test advancement',
@@ -96,6 +100,7 @@ class Advancement:
 
         # display
         # --------------------------------------------------------------
+        self.display = display
         # TODO: support JSON text component for title
         self.title = title
         # TODO: support SNBT strings for icon
@@ -119,8 +124,10 @@ class Advancement:
         2023.11.29
         '''
 
-        data =  {
-            'display': {
+        data =  {}
+
+        if self.display:
+            data['display'] = {
                 'icon': {
                     'item': self.icon
                     # TODO: support SNBT
@@ -133,8 +140,6 @@ class Advancement:
                 'announce_to_chat': self.announce_to_chat,
                 'hidden': self.hidden
             }
-        }
-
         if self.background:
             data['display']['background'] = self.background
         if self.parent:
